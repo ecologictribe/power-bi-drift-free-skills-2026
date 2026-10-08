@@ -1,0 +1,90 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "db01db01db01db010005",
+  "position": {
+    "x": 20,
+    "y": 180,
+    "z": 0,
+    "width": 620,
+    "height": 300,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "lineStackedColumnComboChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dates"
+                    }
+                  },
+                  "Property": "Month"
+                }
+              },
+              "queryRef": "Dates.Month",
+              "nativeQueryRef": "Month",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Consumption"
+                    }
+                  },
+                  "Property": "Actual Consumption"
+                }
+              },
+              "queryRef": "Consumption.Actual Consumption",
+              "nativeQueryRef": "Actual Consumption"
+            }
+          ]
+        },
+        "Y2": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Consumption"
+                    }
+                  },
+                  "Property": "Forecast Consumption"
+                }
+              },
+              "queryRef": "Consumption.Forecast Consumption",
+              "nativeQueryRef": "Forecast Consumption"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

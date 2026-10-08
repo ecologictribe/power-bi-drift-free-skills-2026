@@ -1,0 +1,89 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "db01db01db01db010007",
+  "position": {
+    "x": 20,
+    "y": 500,
+    "z": 0,
+    "width": 610,
+    "height": 200,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Warehouses"
+                    }
+                  },
+                  "Property": "WarehouseName"
+                }
+              },
+              "queryRef": "Warehouses.WarehouseName",
+              "nativeQueryRef": "WarehouseName",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Consumption"
+                    }
+                  },
+                  "Property": "Total Consumption"
+                }
+              },
+              "queryRef": "Consumption.Total Consumption",
+              "nativeQueryRef": "Total Consumption"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Consumption"
+                  }
+                },
+                "Property": "Total Consumption"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

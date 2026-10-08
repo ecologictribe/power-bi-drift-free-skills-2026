@@ -1,0 +1,95 @@
+table Consumption
+
+	/// Unfiltered consumption (splits by Scenario).
+	measure 'Total Consumption' = ```
+		SUM(Consumption[ConsumptionQty])
+		```
+		formatString: #,##0.0
+
+	/// Actual consumption.
+	measure 'Actual Consumption' = ```
+		CALCULATE(SUM(Consumption[ConsumptionQty]), Consumption[Scenario] = "Actual")
+		```
+		formatString: #,##0.0
+
+	/// Forecast consumption.
+	measure 'Forecast Consumption' = ```
+		CALCULATE(SUM(Consumption[ConsumptionQty]), Consumption[Scenario] = "Forecast")
+		```
+		formatString: #,##0.0
+
+	/// Total stockout days.
+	measure 'Stockout Days' = ```
+		SUM(Consumption[StockoutDays])
+		```
+		formatString: #,##0
+
+	/// Treatment avg before policy.
+	measure 'Treat Pre' = ```
+		CALCULATE(AVERAGE(Consumption[ConsumptionQty]), Warehouses[Group] = "Treatment", Consumption[ConsDate] < DATE(2024, 7, 1))
+		```
+		formatString: #,##0.0
+
+	/// Treatment avg after policy.
+	measure 'Treat Post' = ```
+		CALCULATE(AVERAGE(Consumption[ConsumptionQty]), Warehouses[Group] = "Treatment", Consumption[ConsDate] >= DATE(2024, 7, 1))
+		```
+		formatString: #,##0.0
+
+	/// Control avg before policy.
+	measure 'Ctrl Pre' = ```
+		CALCULATE(AVERAGE(Consumption[ConsumptionQty]), Warehouses[Group] = "Control", Consumption[ConsDate] < DATE(2024, 7, 1))
+		```
+		formatString: #,##0.0
+
+	/// Control avg after policy.
+	measure 'Ctrl Post' = ```
+		CALCULATE(AVERAGE(Consumption[ConsumptionQty]), Warehouses[Group] = "Control", Consumption[ConsDate] >= DATE(2024, 7, 1))
+		```
+		formatString: #,##0.0
+
+	/// Differences-in-differences policy effect.
+	measure 'DiD Estimate' = ```
+		([Treat Post] - [Treat Pre]) - ([Ctrl Post] - [Ctrl Pre])
+		```
+		formatString: #,##0.0
+
+	column RowID
+		dataType: int64
+		sourceColumn: RowID
+		summarizeBy: none
+	column ProductID
+		dataType: int64
+		sourceColumn: ProductID
+		summarizeBy: none
+	column WarehouseID
+		dataType: int64
+		sourceColumn: WarehouseID
+		summarizeBy: none
+	column ConsDate
+		dataType: dateTime
+		sourceColumn: ConsDate
+		summarizeBy: none
+	column Scenario
+		dataType: string
+		sourceColumn: Scenario
+		summarizeBy: none
+	column ConsumptionQty
+		dataType: decimal
+		sourceColumn: ConsumptionQty
+		summarizeBy: none
+	column StockoutDays
+		dataType: int64
+		sourceColumn: StockoutDays
+		summarizeBy: none
+
+	partition Consumption = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents("D:/power_new/data_fcst/Consumption.csv"), [Delimiter=",", Columns=7, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"RowID", Int64.Type}, {"ProductID", Int64.Type}, {"WarehouseID", Int64.Type}, {"ConsDate", type datetime}, {"Scenario", type text}, {"ConsumptionQty", type number}, {"StockoutDays", Int64.Type}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table

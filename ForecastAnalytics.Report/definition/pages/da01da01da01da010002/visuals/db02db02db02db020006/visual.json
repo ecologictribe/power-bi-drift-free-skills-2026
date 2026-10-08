@@ -1,0 +1,109 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "db02db02db02db020006",
+  "position": {
+    "x": 20,
+    "y": 500,
+    "z": 0,
+    "width": 1230,
+    "height": 200,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Consumption"
+                    }
+                  },
+                  "Property": "Treat Pre"
+                }
+              },
+              "queryRef": "Consumption.Treat Pre",
+              "nativeQueryRef": "Treat Pre"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Consumption"
+                    }
+                  },
+                  "Property": "Treat Post"
+                }
+              },
+              "queryRef": "Consumption.Treat Post",
+              "nativeQueryRef": "Treat Post"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Consumption"
+                    }
+                  },
+                  "Property": "Ctrl Pre"
+                }
+              },
+              "queryRef": "Consumption.Ctrl Pre",
+              "nativeQueryRef": "Ctrl Pre"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Consumption"
+                    }
+                  },
+                  "Property": "Ctrl Post"
+                }
+              },
+              "queryRef": "Consumption.Ctrl Post",
+              "nativeQueryRef": "Ctrl Post"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Consumption"
+                    }
+                  },
+                  "Property": "DiD Estimate"
+                }
+              },
+              "queryRef": "Consumption.DiD Estimate",
+              "nativeQueryRef": "DiD Estimate"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

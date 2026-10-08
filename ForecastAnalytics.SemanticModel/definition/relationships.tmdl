@@ -1,0 +1,23 @@
+relationship d1e2f3a4b5c60718293a4b600000001
+	fromColumn: Consumption.ProductID
+	toColumn: Products.ProductID
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: true
+
+relationship d1e2f3a4b5c60718293a4b600000002
+	fromColumn: Consumption.WarehouseID
+	toColumn: Warehouses.WarehouseID
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: true
+
+relationship d1e2f3a4b5c60718293a4b600000003
+	fromColumn: Consumption.ConsDate
+	toColumn: Dates.Date
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: true

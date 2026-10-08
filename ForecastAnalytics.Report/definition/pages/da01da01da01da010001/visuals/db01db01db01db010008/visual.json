@@ -1,0 +1,97 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "db01db01db01db010008",
+  "position": {
+    "x": 640,
+    "y": 500,
+    "z": 0,
+    "width": 620,
+    "height": 200,
+    "tabOrder": 8000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Warehouses"
+                    }
+                  },
+                  "Property": "WarehouseName"
+                }
+              },
+              "queryRef": "Warehouses.WarehouseName",
+              "nativeQueryRef": "WarehouseName",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Warehouses"
+                    }
+                  },
+                  "Property": "Group"
+                }
+              },
+              "queryRef": "Warehouses.Group",
+              "nativeQueryRef": "Group",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Consumption"
+                    }
+                  },
+                  "Property": "Actual Consumption"
+                }
+              },
+              "queryRef": "Consumption.Actual Consumption",
+              "nativeQueryRef": "Actual Consumption"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Consumption"
+                    }
+                  },
+                  "Property": "Stockout Days"
+                }
+              },
+              "queryRef": "Consumption.Stockout Days",
+              "nativeQueryRef": "Stockout Days"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

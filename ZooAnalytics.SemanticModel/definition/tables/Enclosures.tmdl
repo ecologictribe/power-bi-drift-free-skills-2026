@@ -1,0 +1,36 @@
+table Enclosures
+
+	/// Total animal capacity.
+	measure 'Total Capacity' = ```
+		SUM(Enclosures[Capacity])
+		```
+		formatString: #,##0
+
+	column EnclosureID
+		dataType: int64
+		sourceColumn: EnclosureID
+		summarizeBy: none
+		isKey
+	column EnclosureName
+		dataType: string
+		sourceColumn: EnclosureName
+		summarizeBy: none
+	column Habitat
+		dataType: string
+		sourceColumn: Habitat
+		summarizeBy: none
+	column Capacity
+		dataType: int64
+		sourceColumn: Capacity
+		summarizeBy: none
+
+	partition Enclosures = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents("D:/power_new/data_zoo/Enclosures.csv"), [Delimiter=",", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"EnclosureID", Int64.Type}, {"EnclosureName", type text}, {"Habitat", type text}, {"Capacity", Int64.Type}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table

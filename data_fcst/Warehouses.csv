@@ -1,0 +1,5 @@
+WarehouseID,WarehouseName,Group
+1,North Hub,Treatment
+2,South Hub,Treatment
+3,East Depot,Control
+4,West Depot,Control

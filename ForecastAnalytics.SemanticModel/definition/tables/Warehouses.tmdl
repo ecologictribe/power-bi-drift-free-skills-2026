@@ -1,0 +1,32 @@
+table Warehouses
+
+	/// Number of warehouses.
+	measure 'Warehouse Count' = ```
+		DISTINCTCOUNT(Warehouses[WarehouseID])
+		```
+		formatString: #,##0
+
+	column WarehouseID
+		dataType: int64
+		sourceColumn: WarehouseID
+		summarizeBy: none
+		isKey
+	column WarehouseName
+		dataType: string
+		sourceColumn: WarehouseName
+		summarizeBy: none
+	column Group
+		dataType: string
+		sourceColumn: Group
+		summarizeBy: none
+
+	partition Warehouses = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents("D:/power_new/data_fcst/Warehouses.csv"), [Delimiter=",", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"WarehouseID", Int64.Type}, {"WarehouseName", type text}, {"Group", type text}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table

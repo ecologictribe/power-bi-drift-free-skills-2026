@@ -1,0 +1,72 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "cb01cb01cb01cb010006",
+  "position": {
+    "x": 650,
+    "y": 180,
+    "z": 0,
+    "width": 600,
+    "height": 300,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "donutChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Species"
+                    }
+                  },
+                  "Property": "Category"
+                }
+              },
+              "queryRef": "Species.Category",
+              "nativeQueryRef": "Category",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Animals"
+                    }
+                  },
+                  "Property": "Animal Count"
+                }
+              },
+              "queryRef": "Animals.Animal Count",
+              "nativeQueryRef": "Animal Count"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,58 @@
+table Dates
+
+	column Date
+		dataType: dateTime
+		sourceColumn: Date
+		summarizeBy: none
+		isKey
+	column Year
+		dataType: int64
+		sourceColumn: Year
+		summarizeBy: none
+	column Quarter
+		dataType: int64
+		sourceColumn: Quarter
+		summarizeBy: none
+	column Month
+		dataType: int64
+		sourceColumn: Month
+		summarizeBy: none
+	column MonthName
+		dataType: string
+		sourceColumn: MonthName
+		summarizeBy: none
+	column DayOfWeek
+		dataType: string
+		sourceColumn: DayOfWeek
+		summarizeBy: none
+	column DayOfMonth
+		dataType: int64
+		sourceColumn: DayOfMonth
+		summarizeBy: none
+	column WeekOfYear
+		dataType: int64
+		sourceColumn: WeekOfYear
+		summarizeBy: none
+	column IsWeekend
+		dataType: boolean
+		sourceColumn: IsWeekend
+		summarizeBy: none
+
+	hierarchy 'Calendar'
+		level Year
+			column: Year
+		level Quarter
+			column: Quarter
+		level Month
+			column: Month
+
+	partition Dates = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents("D:/power_new/data_zoo/Dates.csv"), [Delimiter=",", Columns=9, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"Date", type datetime}, {"Year", Int64.Type}, {"Quarter", Int64.Type}, {"Month", Int64.Type}, {"MonthName", type text}, {"DayOfWeek", type text}, {"DayOfMonth", Int64.Type}, {"WeekOfYear", Int64.Type}, {"IsWeekend", type logical}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table

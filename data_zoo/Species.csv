@@ -1,0 +1,13 @@
+SpeciesID,SpeciesName,Category,Status,DailyFoodKg
+1,Lion,Mammal,Vulnerable,24.2
+2,Tiger,Mammal,Endangered,10.5
+3,Giraffe,Mammal,Vulnerable,8.0
+4,Zebra,Mammal,Near Threatened,24.9
+5,Penguin,Bird,Near Threatened,4.3
+6,Parrot,Bird,Least Concern,14.8
+7,Flamingo,Bird,Least Concern,17.2
+8,Python,Reptile,Least Concern,18.7
+9,Tortoise,Reptile,Endangered,5.2
+10,Crocodile,Reptile,Vulnerable,19.3
+11,Elephant,Mammal,Endangered,15.5
+12,Kangaroo,Mammal,Least Concern,25.7

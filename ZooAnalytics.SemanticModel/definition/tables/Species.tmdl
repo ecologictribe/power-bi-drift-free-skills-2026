@@ -1,0 +1,40 @@
+table Species
+
+	/// Number of species.
+	measure 'Species Count' = ```
+		DISTINCTCOUNT(Species[SpeciesID])
+		```
+		formatString: #,##0
+
+	column SpeciesID
+		dataType: int64
+		sourceColumn: SpeciesID
+		summarizeBy: none
+		isKey
+	column SpeciesName
+		dataType: string
+		sourceColumn: SpeciesName
+		summarizeBy: none
+	column Category
+		dataType: string
+		sourceColumn: Category
+		summarizeBy: none
+	column Status
+		dataType: string
+		sourceColumn: Status
+		summarizeBy: none
+	column DailyFoodKg
+		dataType: decimal
+		sourceColumn: DailyFoodKg
+		summarizeBy: none
+
+	partition Species = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents("D:/power_new/data_zoo/Species.csv"), [Delimiter=",", Columns=5, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"SpeciesID", Int64.Type}, {"SpeciesName", type text}, {"Category", type text}, {"Status", type text}, {"DailyFoodKg", type number}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table

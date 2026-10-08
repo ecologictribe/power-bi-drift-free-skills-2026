@@ -1,0 +1,89 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "cb02cb02cb02cb020006",
+  "position": {
+    "x": 640,
+    "y": 180,
+    "z": 0,
+    "width": 610,
+    "height": 300,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Species"
+                    }
+                  },
+                  "Property": "SpeciesName"
+                }
+              },
+              "queryRef": "Species.SpeciesName",
+              "nativeQueryRef": "SpeciesName",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Animals"
+                    }
+                  },
+                  "Property": "Avg Weight"
+                }
+              },
+              "queryRef": "Animals.Avg Weight",
+              "nativeQueryRef": "Avg Weight"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Animals"
+                  }
+                },
+                "Property": "Avg Weight"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

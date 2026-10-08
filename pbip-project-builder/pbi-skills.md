@@ -112,6 +112,14 @@ relationship <guid-or-name>
 - **Fix pattern**: rename the measure, never the source column (M `sourceColumn`
   bindings depend on column names).
 
+### 11. Safe regeneration (destructive-ops ban)
+- **Rule**: Generators may delete **only** inside their own regenerable artifact
+  dirs (`definition/pages/`). The output root itself is NEVER removed, and the
+  entry point MUST refuse output paths that are `.git` or outside the repo root
+  (see ADR-008 — a root wipe once destroyed the local `.git`).
+- **Why**: Fixed page/visual IDs make reruns stable without root wipes; anything
+  broader risks the repo itself.
+
 ## 5-Step Workflow for Building a PBIP Project
 
 ### Step 1: Initialize Root `.pbip` & Git Configuration

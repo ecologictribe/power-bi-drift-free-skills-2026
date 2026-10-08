@@ -163,6 +163,11 @@ if __name__ == "__main__":
     proj = json.load(open(sp, encoding='utf-8'))["project"]
     out = sys.argv[2] if len(sys.argv) > 2 else os.path.join(
         os.path.dirname(os.path.abspath(__file__)), ".quarantine", "spec_proof", proj)
-    if os.path.isdir(out):
-        shutil.rmtree(out)
+    # SAFETY (ADR-008): the output root must be this repo root (blessed trees)
+    # or a scratch dir beneath it — never .git, never outside the repo.
+    # Only definition/pages/ is ever wiped; the output root itself is untouched.
+    root = os.path.dirname(os.path.abspath(__file__))
+    dest = os.path.abspath(out)
+    if dest == os.path.join(root, ".git") or not dest.startswith(root + os.sep) and dest != root:
+        sys.exit(f"refusing to build into {out!r}")
     build(sp, out)

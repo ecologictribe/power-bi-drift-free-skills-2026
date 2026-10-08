@@ -1,0 +1,32 @@
+table Products
+
+	/// Number of products.
+	measure 'Product Count' = ```
+		DISTINCTCOUNT(Products[ProductID])
+		```
+		formatString: #,##0
+
+	column ProductID
+		dataType: int64
+		sourceColumn: ProductID
+		summarizeBy: none
+		isKey
+	column ProductName
+		dataType: string
+		sourceColumn: ProductName
+		summarizeBy: none
+	column Category
+		dataType: string
+		sourceColumn: Category
+		summarizeBy: none
+
+	partition Products = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents("D:/power_new/data_fcst/Products.csv"), [Delimiter=",", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"ProductID", Int64.Type}, {"ProductName", type text}, {"Category", type text}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table

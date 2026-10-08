@@ -1,0 +1,51 @@
+table Visits
+
+	/// Total visitors.
+	measure 'Total Visitors' = ```
+		SUM(Visits[Visitors])
+		```
+		formatString: #,##0
+
+	/// Ticket revenue.
+	measure 'Total Revenue' = ```
+		SUM(Visits[Revenue])
+		```
+		formatString: $#,##0.00
+
+	/// Revenue per visitor.
+	measure 'Avg Ticket Price' = ```
+		DIVIDE([Total Revenue], [Total Visitors], 0)
+		```
+		formatString: $#,##0.00
+
+	column VisitID
+		dataType: int64
+		sourceColumn: VisitID
+		summarizeBy: none
+	column VisitDate
+		dataType: dateTime
+		sourceColumn: VisitDate
+		summarizeBy: none
+	column TicketType
+		dataType: string
+		sourceColumn: TicketType
+		summarizeBy: none
+	column Visitors
+		dataType: int64
+		sourceColumn: Visitors
+		summarizeBy: none
+	column Revenue
+		dataType: decimal
+		sourceColumn: Revenue
+		summarizeBy: none
+
+	partition Visits = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents("D:/power_new/data_zoo/Visits.csv"), [Delimiter=",", Columns=5, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"VisitID", Int64.Type}, {"VisitDate", type datetime}, {"TicketType", type text}, {"Visitors", Int64.Type}, {"Revenue", type number}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table

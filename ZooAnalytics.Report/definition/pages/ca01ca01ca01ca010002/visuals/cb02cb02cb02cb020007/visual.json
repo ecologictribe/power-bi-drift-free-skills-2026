@@ -1,0 +1,86 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "cb02cb02cb02cb020007",
+  "position": {
+    "x": 20,
+    "y": 500,
+    "z": 0,
+    "width": 1230,
+    "height": 200,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Enclosures"
+                    }
+                  },
+                  "Property": "Habitat"
+                }
+              },
+              "queryRef": "Enclosures.Habitat",
+              "nativeQueryRef": "Habitat",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Animals"
+                    }
+                  },
+                  "Property": "Animal Count"
+                }
+              },
+              "queryRef": "Animals.Animal Count",
+              "nativeQueryRef": "Animal Count"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Animals"
+                    }
+                  },
+                  "Property": "Avg Weight"
+                }
+              },
+              "queryRef": "Animals.Avg Weight",
+              "nativeQueryRef": "Avg Weight"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

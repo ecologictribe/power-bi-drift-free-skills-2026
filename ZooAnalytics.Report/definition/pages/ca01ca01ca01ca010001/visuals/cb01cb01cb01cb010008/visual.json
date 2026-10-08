@@ -1,0 +1,82 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "cb01cb01cb01cb010008",
+  "position": {
+    "x": 640,
+    "y": 500,
+    "z": 0,
+    "width": 620,
+    "height": 200,
+    "tabOrder": 8000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Species"
+                    }
+                  },
+                  "Property": "SpeciesName"
+                }
+              },
+              "queryRef": "Species.SpeciesName",
+              "nativeQueryRef": "SpeciesName",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Animals"
+                    }
+                  },
+                  "Property": "Animal Count"
+                }
+              },
+              "queryRef": "Animals.Animal Count",
+              "nativeQueryRef": "Animal Count"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Animals"
+                    }
+                  },
+                  "Property": "Avg Weight"
+                }
+              },
+              "queryRef": "Animals.Avg Weight",
+              "nativeQueryRef": "Avg Weight"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

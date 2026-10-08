@@ -1,0 +1,31 @@
+relationship c1d2e3f4a5b60718293a4b500000001
+	fromColumn: Animals.SpeciesID
+	toColumn: Species.SpeciesID
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: true
+
+relationship c1d2e3f4a5b60718293a4b500000002
+	fromColumn: Animals.EnclosureID
+	toColumn: Enclosures.EnclosureID
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: true
+
+relationship c1d2e3f4a5b60718293a4b500000003
+	fromColumn: Animals.BirthDate
+	toColumn: Dates.Date
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: true
+
+relationship c1d2e3f4a5b60718293a4b500000004
+	fromColumn: Visits.VisitDate
+	toColumn: Dates.Date
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: true

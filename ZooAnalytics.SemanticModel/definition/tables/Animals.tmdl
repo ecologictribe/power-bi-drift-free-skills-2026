@@ -1,0 +1,65 @@
+table Animals
+
+	/// Total animals.
+	measure 'Animal Count' = ```
+		COUNTROWS(Animals)
+		```
+		formatString: #,##0
+
+	/// Average weight in kg.
+	measure 'Avg Weight' = ```
+		AVERAGE(Animals[WeightKg])
+		```
+		formatString: #,##0.00
+
+	/// Animals share of capacity.
+	measure 'Occupancy Rate' = ```
+		DIVIDE(COUNTROWS(Animals), SUM(Enclosures[Capacity]), 0)
+		```
+		formatString: 0.00%
+
+	/// Capacity target (gauge).
+	measure 'Target Occupancy' = ```
+		0.9
+		```
+		formatString: 0.00%
+
+	column AnimalID
+		dataType: int64
+		sourceColumn: AnimalID
+		summarizeBy: none
+	column SpeciesID
+		dataType: int64
+		sourceColumn: SpeciesID
+		summarizeBy: none
+	column EnclosureID
+		dataType: int64
+		sourceColumn: EnclosureID
+		summarizeBy: none
+	column Gender
+		dataType: string
+		sourceColumn: Gender
+		summarizeBy: none
+	column BirthDate
+		dataType: dateTime
+		sourceColumn: BirthDate
+		summarizeBy: none
+	column WeightKg
+		dataType: decimal
+		sourceColumn: WeightKg
+		summarizeBy: none
+	column Health
+		dataType: string
+		sourceColumn: Health
+		summarizeBy: none
+
+	partition Animals = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents("D:/power_new/data_zoo/Animals.csv"), [Delimiter=",", Columns=7, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"AnimalID", Int64.Type}, {"SpeciesID", Int64.Type}, {"EnclosureID", Int64.Type}, {"Gender", type text}, {"BirthDate", type datetime}, {"WeightKg", type number}, {"Health", type text}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table

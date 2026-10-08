@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "ZooAnalytics"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "470c81ba-d245-4c51-8a2f-0febc99f47b5"
+  }
+}
