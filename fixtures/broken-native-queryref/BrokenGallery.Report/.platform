@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "BrokenGallery"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "50080aee-651e-45e5-92da-3000a96ad350"
+  }
+}

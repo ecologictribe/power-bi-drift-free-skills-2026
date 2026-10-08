@@ -24,7 +24,18 @@ def main(project):
     if not os.path.isfile(f"{project}.pbip"):
         print(f"FAIL no {project}.pbip"); return 1
 
-    data_dirs = [d for d in glob.glob("data*") if os.path.isdir(d)]
+    def find_data_dirs():
+        out, d = [], os.path.abspath(os.getcwd())
+        while True:
+            out += [os.path.join(d, x) for x in glob.glob(os.path.join(d, "data*"))
+                    if os.path.isdir(os.path.join(d, x))]
+            nd = os.path.dirname(d)
+            if nd == d:
+                break
+            d = nd
+        return out
+
+    data_dirs = find_data_dirs()
     csvs = [os.path.basename(f) for d in data_dirs for f in glob.glob(f"{d}/*.csv")]
 
     files = glob.glob(f"{sem}/**/*", recursive=True) + \

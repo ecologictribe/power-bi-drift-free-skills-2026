@@ -1,0 +1,21 @@
+table Customers
+
+	column CustomerID
+		dataType: int64
+		sourceColumn: CustomerID
+		summarizeBy: none
+	column Region
+		dataType: string
+		sourceColumn: Region
+		summarizeBy: none
+
+	partition Customers = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents("D:/power_new/data/Customers.csv"), [Delimiter=",", Columns=5, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {"CustomerID", Int64.Type}, {"CustomerName", type text}, {"Region", type text}, {"Segment", type text}, {"City", type text}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table

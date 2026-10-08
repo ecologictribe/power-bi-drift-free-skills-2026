@@ -1,0 +1,31 @@
+table Orders
+
+	/// Total sales amount.
+	measure 'Total Sales' = ```
+		SUM(Orders[Amount])
+		```
+		formatString: $#,##0.00
+
+	column OrderID
+		dataType: int64
+		sourceColumn: OrderID
+		summarizeBy: none
+	column CustomerID
+		dataType: int64
+		sourceColumn: CustomerID
+		summarizeBy: none
+	column Amount
+		dataType: decimal
+		sourceColumn: Amount
+		summarizeBy: none
+
+	partition Orders = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents("D:/power_new/data/Orders.csv"), [Delimiter=",", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {"OrderID", Int64.Type}, {"CustomerID", Int64.Type}, {"ProductID", Int64.Type}, {"OrderDate", type datetime}, {"Quantity", Int64.Type}, {"Amount", type number}, {"Cost", type number}, {"Status", type text}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table

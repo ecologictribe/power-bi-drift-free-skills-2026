@@ -1,8 +1,30 @@
 # Power BI Projects (PBIP) — Sales & Inventory Analytics
 
-Source-controlled Power BI Project (`.pbip`) builds with TMDL semantic models and
-PBIR reports, generated under strict skill contracts so they open, refresh, and
-render in Power BI Desktop without serialization errors.
+## The problem this repo solves
+
+Public Power BI skills, tutorials, and AI-generated samples have **drifted**:
+they teach TMDL/PBIR expressions from older Desktop releases that current
+versions reject. Following them produces projects that fail to open, lose all
+visuals on save, or render blank pages — with errors that never point at the
+real cause (a wrong enum here, a missing field there).
+
+This repo is the drift-free counterweight. Every skill rule was earned by
+hitting the actual failure in Power BI Desktop v2.157 and fixing it against
+Desktop-saved reference files:
+
+| Symptom | Hidden cause | Rule |
+|---|---|---|
+| Project won't open (`InvalidValueFormat … CrossFilteringBehavior`) | `singleDirection` is not a TOM enum | `crossFilteringBehavior: oneDirection` |
+| All 22 visuals silently dropped, empty pages | projections lacked `nativeQueryRef` | every projection carries `queryRef` + `nativeQueryRef` |
+| Nothing on any page renders | `displayOption: 0` (legacy integer) | `displayOption: "FitToPage"`, page schema `2.0.0` |
+| Schema validator rejects `report.json` | legacy settings keys + integer consts | minimal key set, `exportDataMode: "AllowSummarized"` |
+| Every visual flagged (`titleText`) | `titleText` is not a 2.7.0 title property | show-only titles, Desktop auto-titles |
+| Combo/slicer visuals unbindable | combo needs `Y2` (not `Series`); slicers take `Values` only | exact roles per visual type |
+
+The guarantee is mechanical, not rhetorical: `python validate.py <Project>`
+(or the full `fixtures/check_gate.py`, also enforced by CI) fails the build on
+any of these. The `fixtures/` drift gallery lets students reproduce each failure
+on purpose; `docs/adr/` records why each rule exists.
 
 ## Projects
 
@@ -64,6 +86,17 @@ python validate.py InventoryAnalytics
 Exit 0 with `RESULT: ALL GREEN` means the skill contract holds (TMDL, PBIR shell,
 41 visual projections per project, page consistency). Both projects must stay green
 before any commit.
+
+## Learning depth: drift gallery, ADRs, CI
+
+- `fixtures/` — seven minimal broken projects, each violating exactly one rule
+  (see `fixtures/README.md`). `python fixtures/check_gate.py` asserts both real
+  projects pass and all fixtures fail.
+- `docs/adr/` — six decision records capturing the symptom → evidence → rule for
+  every hard-won fix, so the reasoning survives.
+- `docs/modeling-dax.md` — star schema and forest rule, filter context behind the
+  `CALCULATE` measures, model-wide measure uniqueness, M-vs-TOM types.
+- `.github/workflows/validate.yml` — CI runs the full gate on every push/PR.
 
 ## Regenerating
 
