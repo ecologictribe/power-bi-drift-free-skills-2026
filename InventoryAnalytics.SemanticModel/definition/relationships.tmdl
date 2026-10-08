@@ -1,0 +1,31 @@
+relationship a1b2c3d4e5f647a8b9c0d1e2f3a4b5c6
+	fromColumn: InventoryTransactions.ProductID
+	toColumn: Products.ProductID
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: true
+
+relationship b2c3d4e5f6a7a8b9c0d1e2f3a4b5c6d7
+	fromColumn: InventoryTransactions.WarehouseID
+	toColumn: Warehouses.WarehouseID
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: true
+
+relationship c3d4e5f6a7b8a8b9c0d1e2f3a4b5c6d7e8
+	fromColumn: InventoryTransactions.TransactionDate
+	toColumn: Dates.Date
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: true
+
+relationship d4e5f6a7b8c9a8b9c0d1e2f3a4b5c6d7e8f9
+	fromColumn: Products.SupplierID
+	toColumn: Suppliers.SupplierID
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: true

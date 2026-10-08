@@ -1,0 +1,10 @@
+# Keep PBIP/TMDL/JSON sources on LF in the repo on every OS.
+# (Power BI requires UTF-8 no-BOM; LF keeps diffs clean.)
+* text=auto eol=lf
+*.pbip text eol=lf
+*.pbir text eol=lf
+*.pbism text eol=lf
+*.tmdl text eol=lf
+*.json text eol=lf
+*.csv text eol=lf
+*.md text eol=lf

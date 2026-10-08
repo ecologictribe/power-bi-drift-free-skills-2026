@@ -1,0 +1,9 @@
+WarehouseID,WarehouseName,Region,City,Capacity
+1,New York DC,North,New York,31222
+2,Boston DC,North,Boston,19886
+3,Miami DC,South,Miami,35875
+4,Dallas DC,South,Dallas,13164
+5,Chicago DC,East,Chicago,14747
+6,Columbus DC,East,Columbus,45119
+7,Seattle DC,West,Seattle,16168
+8,Denver DC,West,Denver,33965

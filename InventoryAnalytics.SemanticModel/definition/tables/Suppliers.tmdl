@@ -1,0 +1,36 @@
+table Suppliers
+
+	/// Number of suppliers.
+	measure 'Supplier Count' = ```
+		DISTINCTCOUNT(Suppliers[SupplierID])
+		```
+		formatString: #,##0
+
+	column SupplierID
+		dataType: int64
+		sourceColumn: SupplierID
+		summarizeBy: none
+		isKey
+	column SupplierName
+		dataType: string
+		sourceColumn: SupplierName
+		summarizeBy: none
+	column Country
+		dataType: string
+		sourceColumn: Country
+		summarizeBy: none
+	column LeadTimeDays
+		dataType: int64
+		sourceColumn: LeadTimeDays
+		summarizeBy: none
+
+	partition Suppliers = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents("D:/power_new/data_inventory/Suppliers.csv"), [Delimiter=",", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"SupplierID", Int64.Type}, {"SupplierName", type text}, {"Country", type text}, {"LeadTimeDays", Int64.Type}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table

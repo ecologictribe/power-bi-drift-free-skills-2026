@@ -1,0 +1,87 @@
+table Orders
+
+	/// Total sales amount across all orders.
+	measure 'Total Sales' = ```
+		SUM(Orders[Amount])
+		```
+		formatString: $#,##0.00
+	/// Total cost across all orders.
+	measure 'Total Cost' = ```
+		SUM(Orders[Cost])
+		```
+		formatString: $#,##0.00
+	/// Total profit (sales minus cost).
+	measure 'Total Profit' = ```
+		[Total Sales] - [Total Cost]
+		```
+		formatString: $#,##0.00
+	/// Profit margin as share of sales.
+	measure 'Profit Margin %' = ```
+		DIVIDE([Total Profit], [Total Sales], 0)
+		```
+		formatString: 0.00%
+	/// Total units sold.
+	measure 'Total Quantity' = ```
+		SUM(Orders[Quantity])
+		```
+		formatString: #,##0
+	/// Number of order rows.
+	measure 'Order Count' = ```
+		COUNTROWS(Orders)
+		```
+		formatString: #,##0
+	/// Average sales per order.
+	measure 'Avg Order Value' = ```
+		DIVIDE([Total Sales], [Order Count], 0)
+		```
+		formatString: $#,##0.00
+	/// Sales for completed orders only.
+	measure 'Completed Sales' = ```
+		CALCULATE([Total Sales], Orders[Status] = "Completed")
+		```
+		formatString: $#,##0.00
+
+	column OrderID
+		dataType: int64
+		sourceColumn: OrderID
+		summarizeBy: none
+	column CustomerID
+		dataType: int64
+		sourceColumn: CustomerID
+		summarizeBy: none
+	column ProductID
+		dataType: int64
+		sourceColumn: ProductID
+		summarizeBy: none
+	column OrderDate
+		dataType: dateTime
+		sourceColumn: OrderDate
+		summarizeBy: none
+	column Quantity
+		dataType: int64
+		sourceColumn: Quantity
+		summarizeBy: none
+	column Amount
+		dataType: decimal
+		sourceColumn: Amount
+		summarizeBy: none
+	column Cost
+		dataType: decimal
+		sourceColumn: Cost
+		summarizeBy: none
+	column Status
+		dataType: string
+		sourceColumn: Status
+		summarizeBy: none
+
+	partition Orders = m
+		mode: import
+		source =
+			let
+				// Load local CSV from project data folder
+				Source = Csv.Document(File.Contents("D:/power_new/data/Orders.csv"), [Delimiter=",", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"OrderID", Int64.Type}, {"CustomerID", Int64.Type}, {"ProductID", Int64.Type}, {"OrderDate", type datetime}, {"Quantity", Int64.Type}, {"Amount", type number}, {"Cost", type number}, {"Status", type text}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table

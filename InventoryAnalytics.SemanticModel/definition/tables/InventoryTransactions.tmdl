@@ -1,0 +1,76 @@
+table InventoryTransactions
+
+	/// Net transacted units.
+	measure 'Total Quantity' = ```
+		SUM(InventoryTransactions[Quantity])
+		```
+		formatString: #,##0
+	/// Total transacted value at cost.
+	measure 'Total Value' = ```
+		SUM(InventoryTransactions[TotalValue])
+		```
+		formatString: $#,##0.00
+	/// Number of transaction rows.
+	measure 'Transaction Count' = ```
+		COUNTROWS(InventoryTransactions)
+		```
+		formatString: #,##0
+	/// Units received via purchases.
+	measure 'Units Purchased' = ```
+		CALCULATE(SUM(InventoryTransactions[Quantity]), InventoryTransactions[TransactionType] = "Purchase")
+		```
+		formatString: #,##0
+	/// Units moved via sales.
+	measure 'Units Sold' = ```
+		CALCULATE(SUM(InventoryTransactions[Quantity]), InventoryTransactions[TransactionType] = "Sale")
+		```
+		formatString: #,##0
+	/// Average unit cost.
+	measure 'Avg Unit Cost' = ```
+		AVERAGE(InventoryTransactions[UnitCost])
+		```
+		formatString: $#,##0.00
+
+	column TransactionID
+		dataType: int64
+		sourceColumn: TransactionID
+		summarizeBy: none
+	column ProductID
+		dataType: int64
+		sourceColumn: ProductID
+		summarizeBy: none
+	column WarehouseID
+		dataType: int64
+		sourceColumn: WarehouseID
+		summarizeBy: none
+	column TransactionDate
+		dataType: dateTime
+		sourceColumn: TransactionDate
+		summarizeBy: none
+	column TransactionType
+		dataType: string
+		sourceColumn: TransactionType
+		summarizeBy: none
+	column Quantity
+		dataType: int64
+		sourceColumn: Quantity
+		summarizeBy: none
+	column UnitCost
+		dataType: decimal
+		sourceColumn: UnitCost
+		summarizeBy: none
+	column TotalValue
+		dataType: decimal
+		sourceColumn: TotalValue
+		summarizeBy: none
+
+	partition InventoryTransactions = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents("D:/power_new/data_inventory/InventoryTransactions.csv"), [Delimiter=",", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"TransactionID", Int64.Type}, {"ProductID", Int64.Type}, {"WarehouseID", Int64.Type}, {"TransactionDate", type datetime}, {"TransactionType", type text}, {"Quantity", Int64.Type}, {"UnitCost", type number}, {"TotalValue", type number}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table

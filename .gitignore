@@ -1,0 +1,12 @@
+# Power BI Desktop machine-local state
+.pbi/
+*.abf
+*.zip
+PerformanceTraces/
+# Python
+__pycache__/
+*.pyc
+.venv/
+# Retired working files (per repo policy: quarantine, never commit)
+.quarantine/
+git-url.txt

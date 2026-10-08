@@ -1,0 +1,23 @@
+relationship c9a4e2f1b3d54a6f9e8d1234567890ab
+	fromColumn: Orders.CustomerID
+	toColumn: Customers.CustomerID
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: true
+
+relationship d4b5f6a7c8e94b0a1f2d3456789abcdef0
+	fromColumn: Orders.ProductID
+	toColumn: Products.ProductID
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: true
+
+relationship e5c6a7b8d9f04c1b2a3e456789abcdef12
+	fromColumn: Orders.OrderDate
+	toColumn: Dates.Date
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: true

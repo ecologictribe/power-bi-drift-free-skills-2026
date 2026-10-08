@@ -1,0 +1,41 @@
+table Customers
+
+	/// Number of customers.
+	measure 'Customer Count' = ```
+		DISTINCTCOUNT(Customers[CustomerID])
+		```
+		formatString: #,##0
+
+	column CustomerID
+		dataType: int64
+		sourceColumn: CustomerID
+		summarizeBy: none
+		isKey
+	column CustomerName
+		dataType: string
+		sourceColumn: CustomerName
+		summarizeBy: none
+	column Region
+		dataType: string
+		sourceColumn: Region
+		summarizeBy: none
+	column Segment
+		dataType: string
+		sourceColumn: Segment
+		summarizeBy: none
+	column City
+		dataType: string
+		sourceColumn: City
+		summarizeBy: none
+
+	partition Customers = m
+		mode: import
+		source =
+			let
+				// Load local CSV from project data folder
+				Source = Csv.Document(File.Contents("D:/power_new/data/Customers.csv"), [Delimiter=",", Columns=5, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"CustomerID", Int64.Type}, {"CustomerName", type text}, {"Region", type text}, {"Segment", type text}, {"City", type text}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table

@@ -1,0 +1,301 @@
+CustomerID,CustomerName,Region,Segment,City
+1,Customer 1,North,Consumer,New York
+2,Customer 2,North,Consumer,New York
+3,Customer 3,North,Consumer,New York
+4,Customer 4,North,Consumer,New York
+5,Customer 5,North,Consumer,New York
+6,Customer 6,North,Consumer,Boston
+7,Customer 7,North,Consumer,Boston
+8,Customer 8,North,Consumer,Boston
+9,Customer 9,North,Consumer,Boston
+10,Customer 10,North,Consumer,Boston
+11,Customer 11,North,Consumer,Philadelphia
+12,Customer 12,North,Consumer,Philadelphia
+13,Customer 13,North,Consumer,Philadelphia
+14,Customer 14,North,Consumer,Philadelphia
+15,Customer 15,North,Consumer,Philadelphia
+16,Customer 16,North,Consumer,Pittsburgh
+17,Customer 17,North,Consumer,Pittsburgh
+18,Customer 18,North,Consumer,Pittsburgh
+19,Customer 19,North,Consumer,Pittsburgh
+20,Customer 20,North,Consumer,Pittsburgh
+21,Customer 21,North,Consumer,Hartford
+22,Customer 22,North,Consumer,Hartford
+23,Customer 23,North,Consumer,Hartford
+24,Customer 24,North,Consumer,Hartford
+25,Customer 25,North,Consumer,Hartford
+26,Customer 26,North,Corporate,New York
+27,Customer 27,North,Corporate,New York
+28,Customer 28,North,Corporate,New York
+29,Customer 29,North,Corporate,New York
+30,Customer 30,North,Corporate,New York
+31,Customer 31,North,Corporate,Boston
+32,Customer 32,North,Corporate,Boston
+33,Customer 33,North,Corporate,Boston
+34,Customer 34,North,Corporate,Boston
+35,Customer 35,North,Corporate,Boston
+36,Customer 36,North,Corporate,Philadelphia
+37,Customer 37,North,Corporate,Philadelphia
+38,Customer 38,North,Corporate,Philadelphia
+39,Customer 39,North,Corporate,Philadelphia
+40,Customer 40,North,Corporate,Philadelphia
+41,Customer 41,North,Corporate,Pittsburgh
+42,Customer 42,North,Corporate,Pittsburgh
+43,Customer 43,North,Corporate,Pittsburgh
+44,Customer 44,North,Corporate,Pittsburgh
+45,Customer 45,North,Corporate,Pittsburgh
+46,Customer 46,North,Corporate,Hartford
+47,Customer 47,North,Corporate,Hartford
+48,Customer 48,North,Corporate,Hartford
+49,Customer 49,North,Corporate,Hartford
+50,Customer 50,North,Corporate,Hartford
+51,Customer 51,North,Home Office,New York
+52,Customer 52,North,Home Office,New York
+53,Customer 53,North,Home Office,New York
+54,Customer 54,North,Home Office,New York
+55,Customer 55,North,Home Office,New York
+56,Customer 56,North,Home Office,Boston
+57,Customer 57,North,Home Office,Boston
+58,Customer 58,North,Home Office,Boston
+59,Customer 59,North,Home Office,Boston
+60,Customer 60,North,Home Office,Boston
+61,Customer 61,North,Home Office,Philadelphia
+62,Customer 62,North,Home Office,Philadelphia
+63,Customer 63,North,Home Office,Philadelphia
+64,Customer 64,North,Home Office,Philadelphia
+65,Customer 65,North,Home Office,Philadelphia
+66,Customer 66,North,Home Office,Pittsburgh
+67,Customer 67,North,Home Office,Pittsburgh
+68,Customer 68,North,Home Office,Pittsburgh
+69,Customer 69,North,Home Office,Pittsburgh
+70,Customer 70,North,Home Office,Pittsburgh
+71,Customer 71,North,Home Office,Hartford
+72,Customer 72,North,Home Office,Hartford
+73,Customer 73,North,Home Office,Hartford
+74,Customer 74,North,Home Office,Hartford
+75,Customer 75,North,Home Office,Hartford
+76,Customer 76,South,Consumer,Miami
+77,Customer 77,South,Consumer,Miami
+78,Customer 78,South,Consumer,Miami
+79,Customer 79,South,Consumer,Miami
+80,Customer 80,South,Consumer,Miami
+81,Customer 81,South,Consumer,Atlanta
+82,Customer 82,South,Consumer,Atlanta
+83,Customer 83,South,Consumer,Atlanta
+84,Customer 84,South,Consumer,Atlanta
+85,Customer 85,South,Consumer,Atlanta
+86,Customer 86,South,Consumer,Dallas
+87,Customer 87,South,Consumer,Dallas
+88,Customer 88,South,Consumer,Dallas
+89,Customer 89,South,Consumer,Dallas
+90,Customer 90,South,Consumer,Dallas
+91,Customer 91,South,Consumer,Houston
+92,Customer 92,South,Consumer,Houston
+93,Customer 93,South,Consumer,Houston
+94,Customer 94,South,Consumer,Houston
+95,Customer 95,South,Consumer,Houston
+96,Customer 96,South,Consumer,Nashville
+97,Customer 97,South,Consumer,Nashville
+98,Customer 98,South,Consumer,Nashville
+99,Customer 99,South,Consumer,Nashville
+100,Customer 100,South,Consumer,Nashville
+101,Customer 101,South,Corporate,Miami
+102,Customer 102,South,Corporate,Miami
+103,Customer 103,South,Corporate,Miami
+104,Customer 104,South,Corporate,Miami
+105,Customer 105,South,Corporate,Miami
+106,Customer 106,South,Corporate,Atlanta
+107,Customer 107,South,Corporate,Atlanta
+108,Customer 108,South,Corporate,Atlanta
+109,Customer 109,South,Corporate,Atlanta
+110,Customer 110,South,Corporate,Atlanta
+111,Customer 111,South,Corporate,Dallas
+112,Customer 112,South,Corporate,Dallas
+113,Customer 113,South,Corporate,Dallas
+114,Customer 114,South,Corporate,Dallas
+115,Customer 115,South,Corporate,Dallas
+116,Customer 116,South,Corporate,Houston
+117,Customer 117,South,Corporate,Houston
+118,Customer 118,South,Corporate,Houston
+119,Customer 119,South,Corporate,Houston
+120,Customer 120,South,Corporate,Houston
+121,Customer 121,South,Corporate,Nashville
+122,Customer 122,South,Corporate,Nashville
+123,Customer 123,South,Corporate,Nashville
+124,Customer 124,South,Corporate,Nashville
+125,Customer 125,South,Corporate,Nashville
+126,Customer 126,South,Home Office,Miami
+127,Customer 127,South,Home Office,Miami
+128,Customer 128,South,Home Office,Miami
+129,Customer 129,South,Home Office,Miami
+130,Customer 130,South,Home Office,Miami
+131,Customer 131,South,Home Office,Atlanta
+132,Customer 132,South,Home Office,Atlanta
+133,Customer 133,South,Home Office,Atlanta
+134,Customer 134,South,Home Office,Atlanta
+135,Customer 135,South,Home Office,Atlanta
+136,Customer 136,South,Home Office,Dallas
+137,Customer 137,South,Home Office,Dallas
+138,Customer 138,South,Home Office,Dallas
+139,Customer 139,South,Home Office,Dallas
+140,Customer 140,South,Home Office,Dallas
+141,Customer 141,South,Home Office,Houston
+142,Customer 142,South,Home Office,Houston
+143,Customer 143,South,Home Office,Houston
+144,Customer 144,South,Home Office,Houston
+145,Customer 145,South,Home Office,Houston
+146,Customer 146,South,Home Office,Nashville
+147,Customer 147,South,Home Office,Nashville
+148,Customer 148,South,Home Office,Nashville
+149,Customer 149,South,Home Office,Nashville
+150,Customer 150,South,Home Office,Nashville
+151,Customer 151,East,Consumer,Chicago
+152,Customer 152,East,Consumer,Chicago
+153,Customer 153,East,Consumer,Chicago
+154,Customer 154,East,Consumer,Chicago
+155,Customer 155,East,Consumer,Chicago
+156,Customer 156,East,Consumer,Detroit
+157,Customer 157,East,Consumer,Detroit
+158,Customer 158,East,Consumer,Detroit
+159,Customer 159,East,Consumer,Detroit
+160,Customer 160,East,Consumer,Detroit
+161,Customer 161,East,Consumer,Cleveland
+162,Customer 162,East,Consumer,Cleveland
+163,Customer 163,East,Consumer,Cleveland
+164,Customer 164,East,Consumer,Cleveland
+165,Customer 165,East,Consumer,Cleveland
+166,Customer 166,East,Consumer,Columbus
+167,Customer 167,East,Consumer,Columbus
+168,Customer 168,East,Consumer,Columbus
+169,Customer 169,East,Consumer,Columbus
+170,Customer 170,East,Consumer,Columbus
+171,Customer 171,East,Consumer,Indianapolis
+172,Customer 172,East,Consumer,Indianapolis
+173,Customer 173,East,Consumer,Indianapolis
+174,Customer 174,East,Consumer,Indianapolis
+175,Customer 175,East,Consumer,Indianapolis
+176,Customer 176,East,Corporate,Chicago
+177,Customer 177,East,Corporate,Chicago
+178,Customer 178,East,Corporate,Chicago
+179,Customer 179,East,Corporate,Chicago
+180,Customer 180,East,Corporate,Chicago
+181,Customer 181,East,Corporate,Detroit
+182,Customer 182,East,Corporate,Detroit
+183,Customer 183,East,Corporate,Detroit
+184,Customer 184,East,Corporate,Detroit
+185,Customer 185,East,Corporate,Detroit
+186,Customer 186,East,Corporate,Cleveland
+187,Customer 187,East,Corporate,Cleveland
+188,Customer 188,East,Corporate,Cleveland
+189,Customer 189,East,Corporate,Cleveland
+190,Customer 190,East,Corporate,Cleveland
+191,Customer 191,East,Corporate,Columbus
+192,Customer 192,East,Corporate,Columbus
+193,Customer 193,East,Corporate,Columbus
+194,Customer 194,East,Corporate,Columbus
+195,Customer 195,East,Corporate,Columbus
+196,Customer 196,East,Corporate,Indianapolis
+197,Customer 197,East,Corporate,Indianapolis
+198,Customer 198,East,Corporate,Indianapolis
+199,Customer 199,East,Corporate,Indianapolis
+200,Customer 200,East,Corporate,Indianapolis
+201,Customer 201,East,Home Office,Chicago
+202,Customer 202,East,Home Office,Chicago
+203,Customer 203,East,Home Office,Chicago
+204,Customer 204,East,Home Office,Chicago
+205,Customer 205,East,Home Office,Chicago
+206,Customer 206,East,Home Office,Detroit
+207,Customer 207,East,Home Office,Detroit
+208,Customer 208,East,Home Office,Detroit
+209,Customer 209,East,Home Office,Detroit
+210,Customer 210,East,Home Office,Detroit
+211,Customer 211,East,Home Office,Cleveland
+212,Customer 212,East,Home Office,Cleveland
+213,Customer 213,East,Home Office,Cleveland
+214,Customer 214,East,Home Office,Cleveland
+215,Customer 215,East,Home Office,Cleveland
+216,Customer 216,East,Home Office,Columbus
+217,Customer 217,East,Home Office,Columbus
+218,Customer 218,East,Home Office,Columbus
+219,Customer 219,East,Home Office,Columbus
+220,Customer 220,East,Home Office,Columbus
+221,Customer 221,East,Home Office,Indianapolis
+222,Customer 222,East,Home Office,Indianapolis
+223,Customer 223,East,Home Office,Indianapolis
+224,Customer 224,East,Home Office,Indianapolis
+225,Customer 225,East,Home Office,Indianapolis
+226,Customer 226,West,Consumer,Los Angeles
+227,Customer 227,West,Consumer,Los Angeles
+228,Customer 228,West,Consumer,Los Angeles
+229,Customer 229,West,Consumer,Los Angeles
+230,Customer 230,West,Consumer,Los Angeles
+231,Customer 231,West,Consumer,San Francisco
+232,Customer 232,West,Consumer,San Francisco
+233,Customer 233,West,Consumer,San Francisco
+234,Customer 234,West,Consumer,San Francisco
+235,Customer 235,West,Consumer,San Francisco
+236,Customer 236,West,Consumer,Seattle
+237,Customer 237,West,Consumer,Seattle
+238,Customer 238,West,Consumer,Seattle
+239,Customer 239,West,Consumer,Seattle
+240,Customer 240,West,Consumer,Seattle
+241,Customer 241,West,Consumer,Denver
+242,Customer 242,West,Consumer,Denver
+243,Customer 243,West,Consumer,Denver
+244,Customer 244,West,Consumer,Denver
+245,Customer 245,West,Consumer,Denver
+246,Customer 246,West,Consumer,Phoenix
+247,Customer 247,West,Consumer,Phoenix
+248,Customer 248,West,Consumer,Phoenix
+249,Customer 249,West,Consumer,Phoenix
+250,Customer 250,West,Consumer,Phoenix
+251,Customer 251,West,Corporate,Los Angeles
+252,Customer 252,West,Corporate,Los Angeles
+253,Customer 253,West,Corporate,Los Angeles
+254,Customer 254,West,Corporate,Los Angeles
+255,Customer 255,West,Corporate,Los Angeles
+256,Customer 256,West,Corporate,San Francisco
+257,Customer 257,West,Corporate,San Francisco
+258,Customer 258,West,Corporate,San Francisco
+259,Customer 259,West,Corporate,San Francisco
+260,Customer 260,West,Corporate,San Francisco
+261,Customer 261,West,Corporate,Seattle
+262,Customer 262,West,Corporate,Seattle
+263,Customer 263,West,Corporate,Seattle
+264,Customer 264,West,Corporate,Seattle
+265,Customer 265,West,Corporate,Seattle
+266,Customer 266,West,Corporate,Denver
+267,Customer 267,West,Corporate,Denver
+268,Customer 268,West,Corporate,Denver
+269,Customer 269,West,Corporate,Denver
+270,Customer 270,West,Corporate,Denver
+271,Customer 271,West,Corporate,Phoenix
+272,Customer 272,West,Corporate,Phoenix
+273,Customer 273,West,Corporate,Phoenix
+274,Customer 274,West,Corporate,Phoenix
+275,Customer 275,West,Corporate,Phoenix
+276,Customer 276,West,Home Office,Los Angeles
+277,Customer 277,West,Home Office,Los Angeles
+278,Customer 278,West,Home Office,Los Angeles
+279,Customer 279,West,Home Office,Los Angeles
+280,Customer 280,West,Home Office,Los Angeles
+281,Customer 281,West,Home Office,San Francisco
+282,Customer 282,West,Home Office,San Francisco
+283,Customer 283,West,Home Office,San Francisco
+284,Customer 284,West,Home Office,San Francisco
+285,Customer 285,West,Home Office,San Francisco
+286,Customer 286,West,Home Office,Seattle
+287,Customer 287,West,Home Office,Seattle
+288,Customer 288,West,Home Office,Seattle
+289,Customer 289,West,Home Office,Seattle
+290,Customer 290,West,Home Office,Seattle
+291,Customer 291,West,Home Office,Denver
+292,Customer 292,West,Home Office,Denver
+293,Customer 293,West,Home Office,Denver
+294,Customer 294,West,Home Office,Denver
+295,Customer 295,West,Home Office,Denver
+296,Customer 296,West,Home Office,Phoenix
+297,Customer 297,West,Home Office,Phoenix
+298,Customer 298,West,Home Office,Phoenix
+299,Customer 299,West,Home Office,Phoenix
+300,Customer 300,West,Home Office,Phoenix

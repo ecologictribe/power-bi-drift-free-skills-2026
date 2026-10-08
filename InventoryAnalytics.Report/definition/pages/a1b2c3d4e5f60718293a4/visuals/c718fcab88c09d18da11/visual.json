@@ -1,0 +1,96 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "c718fcab88c09d18da11",
+  "position": {
+    "x": 840,
+    "y": 500,
+    "z": 0,
+    "width": 410,
+    "height": 200,
+    "tabOrder": 9000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Products"
+                    }
+                  },
+                  "Property": "Category"
+                }
+              },
+              "queryRef": "Products.Category",
+              "nativeQueryRef": "Category",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "InventoryTransactions"
+                    }
+                  },
+                  "Property": "Units Purchased"
+                }
+              },
+              "queryRef": "InventoryTransactions.Units Purchased",
+              "nativeQueryRef": "Units Purchased"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "InventoryTransactions"
+                    }
+                  },
+                  "Property": "Units Sold"
+                }
+              },
+              "queryRef": "InventoryTransactions.Units Sold",
+              "nativeQueryRef": "Units Sold"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "InventoryTransactions"
+                    }
+                  },
+                  "Property": "Total Value"
+                }
+              },
+              "queryRef": "InventoryTransactions.Total Value",
+              "nativeQueryRef": "Total Value"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

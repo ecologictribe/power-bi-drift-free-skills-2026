@@ -1,0 +1,52 @@
+table Products
+
+	/// Number of products.
+	measure 'Product Count' = ```
+		DISTINCTCOUNT(Products[ProductID])
+		```
+		formatString: #,##0
+
+	column ProductID
+		dataType: int64
+		sourceColumn: ProductID
+		summarizeBy: none
+		isKey
+	column ProductName
+		dataType: string
+		sourceColumn: ProductName
+		summarizeBy: none
+	column Category
+		dataType: string
+		sourceColumn: Category
+		summarizeBy: none
+	column SubCategory
+		dataType: string
+		sourceColumn: SubCategory
+		summarizeBy: none
+	column SupplierID
+		dataType: int64
+		sourceColumn: SupplierID
+		summarizeBy: none
+	column UnitCost
+		dataType: decimal
+		sourceColumn: UnitCost
+		summarizeBy: none
+	column UnitPrice
+		dataType: decimal
+		sourceColumn: UnitPrice
+		summarizeBy: none
+	column ReorderLevel
+		dataType: int64
+		sourceColumn: ReorderLevel
+		summarizeBy: none
+
+	partition Products = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents("D:/power_new/data_inventory/Products.csv"), [Delimiter=",", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"ProductID", Int64.Type}, {"ProductName", type text}, {"Category", type text}, {"SubCategory", type text}, {"SupplierID", Int64.Type}, {"UnitCost", type number}, {"UnitPrice", type number}, {"ReorderLevel", Int64.Type}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table
