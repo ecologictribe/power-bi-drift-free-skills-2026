@@ -1,0 +1,72 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "bc45a6881ac88a533c0d",
+  "position": {
+    "x": 640,
+    "y": 180,
+    "z": 0,
+    "width": 610,
+    "height": 300,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "funnel",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Channels"
+                    }
+                  },
+                  "Property": "Channel"
+                }
+              },
+              "queryRef": "Channels.Channel",
+              "nativeQueryRef": "Channel",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DailySpend"
+                    }
+                  },
+                  "Property": "Total Conversions"
+                }
+              },
+              "queryRef": "DailySpend.Total Conversions",
+              "nativeQueryRef": "Total Conversions"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

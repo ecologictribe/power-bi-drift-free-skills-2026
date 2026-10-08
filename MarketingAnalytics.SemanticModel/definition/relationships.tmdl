@@ -1,0 +1,23 @@
+relationship d1e2f3a4b5c60718293a4b5c6d7e8f9
+	fromColumn: DailySpend.ChannelID
+	toColumn: Channels.ChannelID
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: true
+
+relationship e2f3a4b5c6d0718293a4b5c6d7e8f9a0
+	fromColumn: DailySpend.CampaignID
+	toColumn: Campaigns.CampaignID
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: true
+
+relationship f3a4b5c6d7e018293a4b5c6d7e8f9a0b1
+	fromColumn: DailySpend.SpendDate
+	toColumn: Dates.Date
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: true

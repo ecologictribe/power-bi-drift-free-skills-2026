@@ -20,6 +20,7 @@ Desktop-saved reference files:
 | Schema validator rejects `report.json` | legacy settings keys + integer consts | minimal key set, `exportDataMode: "AllowSummarized"` |
 | Every visual flagged (`titleText`) | `titleText` is not a 2.7.0 title property | show-only titles, Desktop auto-titles |
 | Combo/slicer visuals unbindable | combo needs `Y2` (not `Series`); slicers take `Values` only | exact roles per visual type |
+| Project won't open (measure/column clash) | measure `'Conversions'` on a table with a `Conversions` column | qualify measures (`Total Conversions`); validator asserts no collisions |
 
 The guarantee is mechanical, not rhetorical: `python validate.py <Project>`
 (or the full `fixtures/check_gate.py`, also enforced by CI) fails the build on
@@ -109,6 +110,14 @@ python build_inventory_pbip.py
 
 Generators wipe `definition/pages/` before rewriting (IDs are re-randomized) and
 write UTF-8 without BOM.
+
+## Spec-driven generation (LLM-agnostic)
+
+`build_from_spec.py` + `spec/<domain>.json` is the generalized path: any agent
+writes a declarative spec (tables, measures, relationships, pages/visuals), the
+emitter produces the drift-free PBIP. `prove_spec.py` asserts semantic
+equivalence with a blessed tree (proven on MarketingAnalytics: all tables,
+relationships, 21 visuals, report shell identical modulo random IDs).
 
 ## Git & remote
 

@@ -24,7 +24,9 @@ DAX, slicers, and interactions.
 Analysis Services requires measure names unique **across the whole model**, not
 per table — hence all business measures live on the fact table with `formatString`
 set (`$#,##0.00`, `#,##0`, `0.00%`). Dimension tables carry only their own
-count measures (`Customer Count`, `Product Count`).
+count measures (`Customer Count`, `Product Count`). Additionally, no measure may
+share a name with a column **in its own table** (`PFE_XL_MEASURE_COLUMN_ALREADY_EXIST`
+otherwise) — always qualify (`Total Conversions`, never bare `Conversions`).
 
 ## Power Query partitions
 

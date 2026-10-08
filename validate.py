@@ -77,6 +77,16 @@ def main(project):
 
     ms = [m for f in tables for m in re.findall(r"measure '([^']+)'", open(f, encoding='utf-8').read())]
     check(len(ms) == len(set(ms)) and ms, f"measures unique ({len(ms)})")
+    coll = []
+    for f in tables:
+        txt = open(f, encoding='utf-8').read()
+        cols = {c.strip("'").lower() for c in re.findall(r"^\tcolumn (.+)$", txt, re.M)}
+        for m in re.findall(r"^\tmeasure '([^']+)'", txt, re.M):
+            if m.lower() in cols:
+                coll.append(f"{os.path.basename(f)}: measure '{m}' collides with column")
+    check(not coll, "no measure/column name collisions")
+    for c in coll[:5]:
+        print("  -", c)
     check(json.load(open(f"{sem}/definition.pbism", encoding='utf-8')).get("version") == "4.0", "pbism 4.0")
     check(json.load(open(f"{rep}/definition.pbir", encoding='utf-8'))["datasetReference"]
           == {"byPath": {"path": f"../{sem}"}}, "pbir byPath")

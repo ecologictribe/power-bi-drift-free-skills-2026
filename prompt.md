@@ -46,6 +46,10 @@ files — they override anything below on conflict:
 - Generate strictly per the skill files (UTF-8 no-BOM, `pbism 4.0`,
   `byPath: ../<Project>.SemanticModel`, tab-indented TMDL, `nativeQueryRef`
   bindings, string `displayOption`, const report settings, show-only titles).
+- Generators must be **data-driven**: new domains add a declarative
+  `spec/<domain>.json` consumed by `build_from_spec.py` — never a new bespoke
+  builder script. Prove new emitters with `prove_spec.py` (semantic equivalence
+  to a blessed tree) before they replace anything.
 - Never leave orphan page/visual folders: wipe `definition/pages/` on regen if IDs
   are re-randomized; keep `pages.json` in sync with folders on disk.
 - **Acceptance gate**: `python validate.py <ProjectName>` must print `RESULT: ALL GREEN`

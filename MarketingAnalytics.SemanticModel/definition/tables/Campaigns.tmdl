@@ -1,0 +1,36 @@
+table Campaigns
+
+	/// Number of campaigns.
+	measure 'Campaign Count' = ```
+		DISTINCTCOUNT(Campaigns[CampaignID])
+		```
+		formatString: #,##0
+
+	column CampaignID
+		dataType: int64
+		sourceColumn: CampaignID
+		summarizeBy: none
+		isKey
+	column CampaignName
+		dataType: string
+		sourceColumn: CampaignName
+		summarizeBy: none
+	column Channel
+		dataType: string
+		sourceColumn: Channel
+		summarizeBy: none
+	column Budget
+		dataType: decimal
+		sourceColumn: Budget
+		summarizeBy: none
+
+	partition Campaigns = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents("D:/power_new/data_mkt/Campaigns.csv"), [Delimiter=",", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"CampaignID", Int64.Type}, {"CampaignName", type text}, {"Channel", type text}, {"Budget", type number}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table

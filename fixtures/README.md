@@ -1,6 +1,6 @@
 # Drift gallery
 
-Seven minimal PBIP projects, each violating **exactly one** skill rule. Run the
+Eight minimal PBIP projects, each violating **exactly one** skill rule. Run the
 validator inside a fixture to see the precise failure; fix it to see green.
 Rebuild all with `python fixtures/make_fixtures.py` (wipes and regenerates).
 
@@ -13,6 +13,7 @@ Rebuild all with `python fixtures/make_fixtures.py` (wipes and regenerates).
 | `broken-title-text` | `titleText` in title properties | visuals conform | `pbir-visuals.md` §3 | ADR-005 |
 | `broken-combo-series` | combo uses `Series` instead of `Y2` | visuals conform | `pbir-visuals.md` §2 | ADR-006 |
 | `broken-slicer-filters` | slicer with `Filters` role | visuals conform | `pbir-visuals.md` §2 | ADR-006 |
+| `broken-measure-collision` | measure `'Amount'` on a table with an `Amount` column | no measure/column name collisions | `pbi-skills.md` §10 | ADR-007 |
 
 ```powershell
 cd fixtures/broken-rel-enum

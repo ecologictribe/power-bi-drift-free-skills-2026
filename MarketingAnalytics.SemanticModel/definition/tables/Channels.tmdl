@@ -1,0 +1,32 @@
+table Channels
+
+	/// Number of channels.
+	measure 'Channel Count' = ```
+		DISTINCTCOUNT(Channels[ChannelID])
+		```
+		formatString: #,##0
+
+	column ChannelID
+		dataType: int64
+		sourceColumn: ChannelID
+		summarizeBy: none
+		isKey
+	column Channel
+		dataType: string
+		sourceColumn: Channel
+		summarizeBy: none
+	column Category
+		dataType: string
+		sourceColumn: Category
+		summarizeBy: none
+
+	partition Channels = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents("D:/power_new/data_mkt/Channels.csv"), [Delimiter=",", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"ChannelID", Int64.Type}, {"Channel", type text}, {"Category", type text}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table

@@ -103,6 +103,15 @@ relationship <guid-or-name>
   dimensions) fails Desktop with ambiguous-path errors: keep one `isActive: true`,
   mark the other `isActive: false` (still usable via `USERELATIONSHIP` in DAX).
 
+### 10. Measure naming (uniqueness + no column collisions)
+- **Rule**: Measure names must be unique across the **whole model** AND must not
+  equal any column name **in their own table** (case-insensitive). Desktop fails
+  the open with `PFE_XL_MEASURE_COLUMN_ALREADY_EXIST` otherwise.
+- **Why**: A bare measure like `'Conversions'` on a table with a `Conversions`
+  column collides; qualified names (`Total Conversions`) never do.
+- **Fix pattern**: rename the measure, never the source column (M `sourceColumn`
+  bindings depend on column names).
+
 ## 5-Step Workflow for Building a PBIP Project
 
 ### Step 1: Initialize Root `.pbip` & Git Configuration

@@ -121,6 +121,7 @@ FIXTURES = {
     "broken-title-text":    {"title_text": True},
     "broken-combo-series":  {"combo": True},
     "broken-slicer-filters": {"slicer": True},
+    "broken-measure-collision": {"measure_collision": True},
 }
 
 for slug, mut in FIXTURES.items():
@@ -151,7 +152,12 @@ for slug, mut in FIXTURES.items():
            f"{T}toColumn: Customers.CustomerID\n"
            f"{T}crossFilteringBehavior: {mut.get('rel', 'oneDirection')}\n"
            f"{T}fromCardinality: many\n{T}toCardinality: one\n{T}isActive: true\n")
-    w_text(os.path.join(base, sem, "definition", "tables", "Orders.tmdl"), ORDERS_T)
+    orders_t = ORDERS_T
+    if mut.get("measure_collision"):
+        orders_t += (f"\n{T}/// Collides with the Amount column on purpose.\n"
+                     f"{T}measure 'Amount' = ```\n{T}{T}SUM(Orders[Amount])\n{T}\t```\n"
+                     f"{T}{T}formatString: $#,##0.00\n")
+    w_text(os.path.join(base, sem, "definition", "tables", "Orders.tmdl"), orders_t)
     w_text(os.path.join(base, sem, "definition", "tables", "Customers.tmdl"), CUST_T)
 
     w_json(os.path.join(base, rep, "definition.pbir"), {

@@ -1,0 +1,80 @@
+table DailySpend
+
+	/// Total media spend.
+	measure 'Total Spend' = ```
+		SUM(DailySpend[Spend])
+		```
+		formatString: $#,##0.00
+	/// Attributed revenue.
+	measure 'Total Revenue' = ```
+		SUM(DailySpend[Revenue])
+		```
+		formatString: $#,##0.00
+	/// Return on ad spend.
+	measure 'ROAS' = ```
+		DIVIDE([Total Revenue], [Total Spend], 0)
+		```
+		formatString: 0.00
+	/// Total conversions.
+	measure 'Total Conversions' = ```
+		SUM(DailySpend[Conversions])
+		```
+		formatString: #,##0
+	/// Total clicks.
+	measure 'Total Clicks' = ```
+		SUM(DailySpend[Clicks])
+		```
+		formatString: #,##0
+	/// Click-through rate.
+	measure 'CTR' = ```
+		DIVIDE(SUM(DailySpend[Clicks]), SUM(DailySpend[Impressions]), 0)
+		```
+		formatString: 0.00%
+
+	column SpendID
+		dataType: int64
+		sourceColumn: SpendID
+		summarizeBy: none
+	column ChannelID
+		dataType: int64
+		sourceColumn: ChannelID
+		summarizeBy: none
+	column CampaignID
+		dataType: int64
+		sourceColumn: CampaignID
+		summarizeBy: none
+	column SpendDate
+		dataType: dateTime
+		sourceColumn: SpendDate
+		summarizeBy: none
+	column Spend
+		dataType: decimal
+		sourceColumn: Spend
+		summarizeBy: none
+	column Impressions
+		dataType: int64
+		sourceColumn: Impressions
+		summarizeBy: none
+	column Clicks
+		dataType: int64
+		sourceColumn: Clicks
+		summarizeBy: none
+	column Conversions
+		dataType: int64
+		sourceColumn: Conversions
+		summarizeBy: none
+	column Revenue
+		dataType: decimal
+		sourceColumn: Revenue
+		summarizeBy: none
+
+	partition DailySpend = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents("D:/power_new/data_mkt/DailySpend.csv"), [Delimiter=",", Columns=9, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"SpendID", Int64.Type}, {"ChannelID", Int64.Type}, {"CampaignID", Int64.Type}, {"SpendDate", type datetime}, {"Spend", type number}, {"Impressions", Int64.Type}, {"Clicks", Int64.Type}, {"Conversions", Int64.Type}, {"Revenue", type number}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table
