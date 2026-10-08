@@ -1,0 +1,28 @@
+table CostCenters
+
+	/// Number of cost centers.
+	measure 'Cost Center Count' = ```
+		DISTINCTCOUNT(CostCenters[CostCenterID])
+		```
+		formatString: #,##0
+
+	column CostCenterID
+		dataType: int64
+		sourceColumn: CostCenterID
+		summarizeBy: none
+		isKey
+	column CCName
+		dataType: string
+		sourceColumn: CCName
+		summarizeBy: none
+
+	partition CostCenters = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents("D:/power_new/data_fin/CostCenters.csv"), [Delimiter=",", Columns=2, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"CostCenterID", Int64.Type}, {"CCName", type text}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table

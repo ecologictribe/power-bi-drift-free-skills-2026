@@ -54,6 +54,7 @@ Rules:
 | `gauge` | `Y` (actual measure) + `TargetValue` (target measure) |
 | `kpi` | `Indicator` (measure) + `Goal` (measure) + `TrendLine` (date column) |
 | `pivotTable` (matrix) | `Rows` + `Columns` (columns) + `Values` (measures) |
+| `waterfallChart` | `Category` + `Y` (signed measure; negatives render as decreases) |
 
 `Series` holds a **column** (legend split). `Y2` holds a **measure** (line axis).
 

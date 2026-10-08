@@ -1,0 +1,68 @@
+table Ledger
+
+	/// Unfiltered amount (splits by Scenario in visuals).
+	measure 'Total Amount' = ```
+		SUM(Ledger[Amount])
+		```
+		formatString: $#,##0.00
+	/// Actual amount.
+	measure 'Actual' = ```
+		CALCULATE(SUM(Ledger[Amount]), Ledger[Scenario] = "Actual")
+		```
+		formatString: $#,##0.00
+	/// Budgeted amount.
+	measure 'Budget' = ```
+		CALCULATE(SUM(Ledger[Amount]), Ledger[Scenario] = "Budget")
+		```
+		formatString: $#,##0.00
+	/// Actual minus budget.
+	measure 'Variance' = ```
+		[Actual] - [Budget]
+		```
+		formatString: $#,##0.00
+	/// Variance share of budget.
+	measure 'Variance %' = ```
+		DIVIDE([Variance], [Budget], 0)
+		```
+		formatString: 0.00%
+	/// Number of ledger rows.
+	measure 'Entry Count' = ```
+		COUNTROWS(Ledger)
+		```
+		formatString: #,##0
+
+	column EntryID
+		dataType: int64
+		sourceColumn: EntryID
+		summarizeBy: none
+	column AccountID
+		dataType: int64
+		sourceColumn: AccountID
+		summarizeBy: none
+	column CostCenterID
+		dataType: int64
+		sourceColumn: CostCenterID
+		summarizeBy: none
+	column EntryDate
+		dataType: dateTime
+		sourceColumn: EntryDate
+		summarizeBy: none
+	column Scenario
+		dataType: string
+		sourceColumn: Scenario
+		summarizeBy: none
+	column Amount
+		dataType: decimal
+		sourceColumn: Amount
+		summarizeBy: none
+
+	partition Ledger = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents("D:/power_new/data_fin/Ledger.csv"), [Delimiter=",", Columns=6, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"EntryID", Int64.Type}, {"AccountID", Int64.Type}, {"CostCenterID", Int64.Type}, {"EntryDate", type datetime}, {"Scenario", type text}, {"Amount", type number}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table

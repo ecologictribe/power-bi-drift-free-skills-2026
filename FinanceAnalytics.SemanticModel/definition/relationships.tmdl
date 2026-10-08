@@ -1,0 +1,23 @@
+relationship c1d2e3f4a5b60718293a4b5c6d7e8f9
+	fromColumn: Ledger.AccountID
+	toColumn: Accounts.AccountID
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: true
+
+relationship d2e3f4a5b6c0718293a4b5c6d7e8f9a0
+	fromColumn: Ledger.CostCenterID
+	toColumn: CostCenters.CostCenterID
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: true
+
+relationship e3f4a5b6c7d018293a4b5c6d7e8f9a0b1
+	fromColumn: Ledger.EntryDate
+	toColumn: Dates.Date
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: true

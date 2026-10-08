@@ -1,0 +1,32 @@
+table Accounts
+
+	/// Number of accounts.
+	measure 'Account Count' = ```
+		DISTINCTCOUNT(Accounts[AccountID])
+		```
+		formatString: #,##0
+
+	column AccountID
+		dataType: int64
+		sourceColumn: AccountID
+		summarizeBy: none
+		isKey
+	column AccountName
+		dataType: string
+		sourceColumn: AccountName
+		summarizeBy: none
+	column AccountType
+		dataType: string
+		sourceColumn: AccountType
+		summarizeBy: none
+
+	partition Accounts = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents("D:/power_new/data_fin/Accounts.csv"), [Delimiter=",", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"AccountID", Int64.Type}, {"AccountName", type text}, {"AccountType", type text}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table

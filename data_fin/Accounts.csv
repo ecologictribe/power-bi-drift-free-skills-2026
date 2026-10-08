@@ -1,0 +1,12 @@
+AccountID,AccountName,AccountType
+1,Product Revenue,Revenue
+2,Service Revenue,Revenue
+3,Other Income,Revenue
+4,Materials,COGS
+5,Labor,COGS
+6,Salaries,Opex
+7,Rent,Opex
+8,Marketing,Opex
+9,Travel,Opex
+10,IT,Opex
+11,Tax,Other
