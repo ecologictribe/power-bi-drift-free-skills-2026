@@ -1,0 +1,96 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "06cf58d2aff85a21b61f",
+  "position": {
+    "x": 640,
+    "y": 500,
+    "z": 0,
+    "width": 620,
+    "height": 200,
+    "tabOrder": 8000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Departments"
+                    }
+                  },
+                  "Property": "DeptName"
+                }
+              },
+              "queryRef": "Departments.DeptName",
+              "nativeQueryRef": "DeptName",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Employees"
+                    }
+                  },
+                  "Property": "Headcount"
+                }
+              },
+              "queryRef": "Employees.Headcount",
+              "nativeQueryRef": "Headcount"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Employees"
+                    }
+                  },
+                  "Property": "Attrition Count"
+                }
+              },
+              "queryRef": "Employees.Attrition Count",
+              "nativeQueryRef": "Attrition Count"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Employees"
+                    }
+                  },
+                  "Property": "Avg Salary"
+                }
+              },
+              "queryRef": "Employees.Avg Salary",
+              "nativeQueryRef": "Avg Salary"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,31 @@
+relationship e1f2a3b4c5d647e8f9a0b1c2d3e4f5a6
+	fromColumn: Employees.DepartmentID
+	toColumn: Departments.DepartmentID
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: true
+
+relationship f2a3b4c5d6e7e8f9a0b1c2d3e4f5a6b7
+	fromColumn: Employees.HireDate
+	toColumn: Dates.Date
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: true
+
+relationship a3b4c5d6e7f8e8f9a0b1c2d3e4f5a6b7c8
+	fromColumn: Recruitment.DepartmentID
+	toColumn: Departments.DepartmentID
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: true
+
+relationship b4c5d6e7f8a9e8f9a0b1c2d3e4f5a6b7c8d9
+	fromColumn: Recruitment.ApplicationDate
+	toColumn: Dates.Date
+	crossFilteringBehavior: oneDirection
+	fromCardinality: many
+	toCardinality: one
+	isActive: false

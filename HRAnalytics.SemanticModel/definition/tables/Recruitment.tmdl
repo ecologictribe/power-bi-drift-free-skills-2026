@@ -1,0 +1,49 @@
+table Recruitment
+
+	/// Stage-reached application rows (funnel counts).
+	measure 'Applications' = ```
+		COUNTROWS(Recruitment)
+		```
+		formatString: #,##0
+	/// Hired applications.
+	measure 'Hires' = ```
+		CALCULATE(COUNTROWS(Recruitment), Recruitment[Stage] = "Hired")
+		```
+		formatString: #,##0
+	/// Hired share of applicants.
+	measure 'Hire Rate' = ```
+		DIVIDE([Hires], CALCULATE(COUNTROWS(Recruitment), Recruitment[Stage] = "Applied"), 0)
+		```
+		formatString: 0.00%
+
+	column ApplicationID
+		dataType: int64
+		sourceColumn: ApplicationID
+		summarizeBy: none
+	column DepartmentID
+		dataType: int64
+		sourceColumn: DepartmentID
+		summarizeBy: none
+	column Stage
+		dataType: string
+		sourceColumn: Stage
+		summarizeBy: none
+	column StageOrder
+		dataType: int64
+		sourceColumn: StageOrder
+		summarizeBy: none
+	column ApplicationDate
+		dataType: dateTime
+		sourceColumn: ApplicationDate
+		summarizeBy: none
+
+	partition Recruitment = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents("D:/power_new/data_hr/Recruitment.csv"), [Delimiter=",", Columns=5, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"ApplicationID", Int64.Type}, {"DepartmentID", Int64.Type}, {"Stage", type text}, {"StageOrder", Int64.Type}, {"ApplicationDate", type datetime}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table

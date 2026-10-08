@@ -1,0 +1,76 @@
+table Employees
+
+	/// Total employees.
+	measure 'Headcount' = ```
+		COUNTROWS(Employees)
+		```
+		formatString: #,##0
+	/// Employees who left.
+	measure 'Attrition Count' = ```
+		CALCULATE(COUNTROWS(Employees), Employees[Attrition] = "Yes")
+		```
+		formatString: #,##0
+	/// Share of headcount lost.
+	measure 'Attrition Rate' = ```
+		DIVIDE([Attrition Count], [Headcount], 0)
+		```
+		formatString: 0.00%
+	/// Average salary.
+	measure 'Avg Salary' = ```
+		AVERAGE(Employees[Salary])
+		```
+		formatString: $#,##0.00
+	/// Workforce plan target (KPI goal).
+	measure 'Headcount Target' = ```
+		500
+		```
+		formatString: #,##0
+	/// Tolerated attrition (gauge target).
+	measure 'Target Attrition Rate' = ```
+		0.15
+		```
+		formatString: 0.00%
+
+	column EmployeeID
+		dataType: int64
+		sourceColumn: EmployeeID
+		summarizeBy: none
+	column Gender
+		dataType: string
+		sourceColumn: Gender
+		summarizeBy: none
+	column Age
+		dataType: int64
+		sourceColumn: Age
+		summarizeBy: none
+	column DepartmentID
+		dataType: int64
+		sourceColumn: DepartmentID
+		summarizeBy: none
+	column JobLevel
+		dataType: string
+		sourceColumn: JobLevel
+		summarizeBy: none
+	column HireDate
+		dataType: dateTime
+		sourceColumn: HireDate
+		summarizeBy: none
+	column Salary
+		dataType: decimal
+		sourceColumn: Salary
+		summarizeBy: none
+	column Attrition
+		dataType: string
+		sourceColumn: Attrition
+		summarizeBy: none
+
+	partition Employees = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents("D:/power_new/data_hr/Employees.csv"), [Delimiter=",", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"EmployeeID", Int64.Type}, {"Gender", type text}, {"Age", Int64.Type}, {"DepartmentID", Int64.Type}, {"JobLevel", type text}, {"HireDate", type datetime}, {"Salary", type number}, {"Attrition", type text}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table

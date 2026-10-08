@@ -1,0 +1,113 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "5b216f2f438e3ffd0ad4",
+  "position": {
+    "x": 20,
+    "y": 480,
+    "z": 0,
+    "width": 1230,
+    "height": 220,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Employees"
+                    }
+                  },
+                  "Property": "JobLevel"
+                }
+              },
+              "queryRef": "Employees.JobLevel",
+              "nativeQueryRef": "JobLevel",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Departments"
+                    }
+                  },
+                  "Property": "DeptName"
+                }
+              },
+              "queryRef": "Departments.DeptName",
+              "nativeQueryRef": "DeptName",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Employees"
+                    }
+                  },
+                  "Property": "Gender"
+                }
+              },
+              "queryRef": "Employees.Gender",
+              "nativeQueryRef": "Gender",
+              "active": true
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Employees"
+                    }
+                  },
+                  "Property": "Avg Salary"
+                }
+              },
+              "queryRef": "Employees.Avg Salary",
+              "nativeQueryRef": "Avg Salary"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Employees"
+                    }
+                  },
+                  "Property": "Attrition"
+                }
+              },
+              "queryRef": "Employees.Attrition",
+              "nativeQueryRef": "Attrition",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

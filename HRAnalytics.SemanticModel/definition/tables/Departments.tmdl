@@ -1,0 +1,32 @@
+table Departments
+
+	/// Number of departments.
+	measure 'Dept Count' = ```
+		DISTINCTCOUNT(Departments[DepartmentID])
+		```
+		formatString: #,##0
+
+	column DepartmentID
+		dataType: int64
+		sourceColumn: DepartmentID
+		summarizeBy: none
+		isKey
+	column DeptName
+		dataType: string
+		sourceColumn: DeptName
+		summarizeBy: none
+	column Location
+		dataType: string
+		sourceColumn: Location
+		summarizeBy: none
+
+	partition Departments = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(File.Contents("D:/power_new/data_hr/Departments.csv"), [Delimiter=",", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"DepartmentID", Int64.Type}, {"DeptName", type text}, {"Location", type text}})
+			in
+				#"Changed Type"
+		annotation PBI_ResultType = Table

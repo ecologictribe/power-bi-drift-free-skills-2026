@@ -50,6 +50,10 @@ Rules:
 | `lineStackedColumnComboChart` | `Category` + `Y` (columns) + `Y2` (line). NEVER `Series` here. |
 | `tableEx` | `Values` |
 | `slicer` | `Values` ONLY. NEVER add a `Filters` key inside `queryState`. |
+| `funnel` | `Category` + `Y` (sort `Category` by its order column ascending) |
+| `gauge` | `Y` (actual measure) + `TargetValue` (target measure) |
+| `kpi` | `Indicator` (measure) + `Goal` (measure) + `TrendLine` (date column) |
+| `pivotTable` (matrix) | `Rows` + `Columns` (columns) + `Values` (measures) |
 
 `Series` holds a **column** (legend split). `Y2` holds a **measure** (line axis).
 

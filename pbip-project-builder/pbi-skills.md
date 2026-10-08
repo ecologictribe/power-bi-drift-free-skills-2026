@@ -84,7 +84,24 @@ relationship <guid-or-name>
 - **Why**: `filterPaneEnabled` / `navContentPaneEnabled` are rejected as additional
   properties, and `exportDataMode: 1` / `queryLimitOption: 3` (PBIR-Legacy integers)
   fail const-type validation in `report/3.2.0` (validator errors, Oct 2026). When in
-  doubt, emit fewer settings keys — every key must exist in the schema.
+   doubt, emit fewer settings keys — every key must exist in the schema.
+
+### 9. Hierarchies & relationship forest (`tables/*.tmdl`, `relationships.tmdl`)
+- **Rule**: Hierarchies live inside the table, levels ordered coarse → fine, each
+  `level` mapping to an existing `column:` in the same table:
+```tmdl
+	hierarchy 'Calendar'
+		level Year
+			column: Year
+		level Quarter
+			column: Quarter
+		level Month
+			column: Month
+```
+- **Rule**: Active relationships must form a **forest** — at most one active filter
+  path between any two tables. A redundant path (e.g. two facts sharing two
+  dimensions) fails Desktop with ambiguous-path errors: keep one `isActive: true`,
+  mark the other `isActive: false` (still usable via `USERELATIONSHIP` in DAX).
 
 ## 5-Step Workflow for Building a PBIP Project
 

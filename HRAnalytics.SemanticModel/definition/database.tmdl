@@ -1,0 +1,3 @@
+database HRAnalytics
+	compatibilityLevel: 1702
+	compatibilityMode: powerBI

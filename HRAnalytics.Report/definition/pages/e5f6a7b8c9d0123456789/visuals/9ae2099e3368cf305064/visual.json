@@ -1,0 +1,71 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "9ae2099e3368cf305064",
+  "position": {
+    "x": 430,
+    "y": 180,
+    "z": 0,
+    "width": 400,
+    "height": 300,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "gauge",
+    "query": {
+      "queryState": {
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Employees"
+                    }
+                  },
+                  "Property": "Attrition Rate"
+                }
+              },
+              "queryRef": "Employees.Attrition Rate",
+              "nativeQueryRef": "Attrition Rate"
+            }
+          ]
+        },
+        "TargetValue": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Employees"
+                    }
+                  },
+                  "Property": "Target Attrition Rate"
+                }
+              },
+              "queryRef": "Employees.Target Attrition Rate",
+              "nativeQueryRef": "Target Attrition Rate"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
